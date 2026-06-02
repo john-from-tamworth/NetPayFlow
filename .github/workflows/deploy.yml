@@ -1,0 +1,41 @@
+name: Deploy React Vite to Pages
+
+on:
+  push:
+    branches: [ "main" ] # Triggers the build automatically on a save
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Second Commit
+        uses: actions/checkout@v4
+        with:
+          ref: 'main' # This pulls your updated main branch with the index.html and config fixes
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-cache: 'npm'
+
+      - name: Install dependencies and Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload static assets
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist' # 💡 Points directly to Vite's compiled folder to fix the MIME type error
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
