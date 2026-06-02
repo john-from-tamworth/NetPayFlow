@@ -1,0 +1,6 @@
+{
+  "name": "NetPayFlow",
+  "description": "A premium, interactive UK Salary and Take-Home Pay Calculator with real-time tax, NI, pension, and student loan calculations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
