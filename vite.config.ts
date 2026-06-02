@@ -6,7 +6,7 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     // 💡 Added the base property below to fix the 404 error on GitHub Pages
-    base: '/NetPayFlow/', 
+    base: './', 
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
